@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { fullName, phone, city, note, naceKodu, sektorTanimi } = body;
+    const { fullName, phone, city, note, naceKodu, sektorTanimi, toolName, calculationSummary } = body;
 
     // Basit doğrulama (Validation)
     if (!fullName || !phone || !city) {
@@ -18,32 +18,22 @@ export async function POST(request: Request) {
       phone,
       city,
       note: note || "Belirtilmedi",
-      naceKodu: naceKodu || "Bilinmiyor",
-      sektorTanimi: sektorTanimi || "Bilinmiyor",
+      toolName: toolName || "Genel Hesaplama & Danışmanlık",
+      naceKodu: naceKodu || null,
+      sektorTanimi: sektorTanimi || null,
+      calculationSummary: calculationSummary || null,
       createdAt: new Date().toISOString(),
       userAgent: request.headers.get("user-agent") || "Bilinmiyor",
     };
 
-    // Sunucu logu (Webhook veya veritabanı eklemek için hazır)
-    console.log("=== YENİ KOSGEB HİBE TALEP LEAD'İ ===");
+    console.log("=== YENİ HESAPLAMA PORTALI DANIŞMANLIK TALEBİ ===");
     console.log(JSON.stringify(leadPayload, null, 2));
-
-    /*
-      İleride Webhook bağlamak için örnek:
-      if (process.env.CRM_WEBHOOK_URL) {
-        await fetch(process.env.CRM_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(leadPayload),
-        });
-      }
-    */
 
     return NextResponse.json(
       {
         success: true,
-        message: "Hibe analiz talebiniz başarıyla kaydedildi.",
-        data: { naceKodu, fullName },
+        message: "Danışmanlık ve analiz talebiniz başarıyla kaydedildi.",
+        data: { fullName, toolName: leadPayload.toolName },
       },
       { status: 200 }
     );

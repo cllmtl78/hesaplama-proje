@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 
-interface Sektor {
+export interface Sektor {
   nace_kodu: string;
   sektor_tanimi: string;
   kisim_adi?: string;

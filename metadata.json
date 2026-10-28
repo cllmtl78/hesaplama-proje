@@ -1,0 +1,8 @@
+{
+  "name": "PratikHesap.co - Hesaplama Portalı",
+  "description": "Kıdem ve ihbar tazminatı, KDV ve fatura tevkifatı, freelancer gelir vergisi ve 2.627 sektörlü KOSGEB NACE teşvik sorgulama araçları.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
